@@ -1,0 +1,41 @@
+#dice1 {
+	background-image: url(images/dice.png); 
+	height: 64px;
+	width: 64px;
+}
+#dice2 {
+	background-image: url(images/dice.png); 
+	height: 64px;
+	width: 64px;
+	background-position: 0 -64px;
+}
+#dice3 {
+	background-image: url(images/dice.png); 
+	height: 64px;
+	width: 64px;
+	background-position: 0 -256px;
+}
+#dice4 {
+	background-image: url(images/dice.png); 
+	height: 64px;
+	width: 64px;
+	background-position: 0 -320px;
+}
+.row {
+  display: flex;
+}
+.column {
+  width: 15%;
+
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+body { 
+  background-image: url(images/bgimage.jpeg);
+  background-size: cover;
+}
+.dice, button{
+	margin: 0 auto;
+}

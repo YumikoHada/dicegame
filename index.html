@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DICE</title>
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<div class="row">
+		<div class="column" id="player1">
+			<div id="dice1" class="dice"></div>
+			<div id="dice2" class="dice"></div>
+			<div id="player1">
+				<p id="total1"></p>
+				<p id="result1"></p>
+			</div>
+		</div>
+		<div class="column"  id="player2">
+			<div id="dice3" class="dice"></div>
+			<div id="dice4" class="dice"></div>
+			<div id="player2">
+				<p id="total2"></p>
+				<p id="result2"></p>
+			</div>
+		</div>
+	</div>
+	<button onclick="roll5times()">Roll</button>
+
+	<div class="container1"></div>
+	
+  	<!-- <table>
+  		<tbody>
+		  	<tr>
+				<td>1stPLAYER</td>
+			</tr>
+			<tr>
+				<td>2ndPLAYER</td>
+			</tr>
+			<tr>
+				<td>RESULT</td>
+			</tr>
+		</tbody>
+	 	<thead>
+			<tr>
+			  	<th scope="col"></th>
+				<th scope="col">1st</th>
+				<th scope="col">2nd</th> 
+				<th scope="col">3rd</th>
+				<th scope="col">4th</th>
+				<th scope="col">5th</th>
+				<th scope="col">TOTAL</th>
+			</tr>
+		</thead>
+		
+	</table> -->
+	
+	
+
+<script>
+	var count = 0;
+
+	var table1 = document.createElement("table");
+	document.querySelector(".container1").append(table1);
+
+	var tableheader = document.createElement('tr');
+	var tableRow1 = document.createElement('tr');
+	var tableRow2 = document.createElement('tr');
+
+	table1.appendChild(tableheader);
+	table1.appendChild(tableRow1);
+	table1.appendChild(tableRow2);
+
+	var total1 = 0;
+	var total2 = 0;
+		
+
+	function roll(){
+		var dice1 = document.getElementById('dice1');
+		// id=dice1の値を取得
+		var rnd1 = Math.ceil(Math.random() * 6);
+		// 1-6の数字からランダムに数字を取得
+		console.log(rnd1);
+		var a = (rnd1 - 1)*64;
+		// 画像を動かすためにrndで取得した数字から64を掛ける(画像サイズが64pxだから)。(rnd-1)とするのは、そのままだと画像の横幅64pxから計算してしまうからpositionの起点を0に戻す。rndで得られた数字が6だとすると、6*64=384.widthが-384pxだと表示される画像は1の目が表示される。(横幅64pxに384pxを足しているから)
+		dice1.style.backgroundPosition = '-'+a+'px 0';
+		// dice1のcssにvar xで得た値を取得してイメージを動かす。=-xpx 0
+		var dice2 = document.getElementById('dice2');
+		var rnd2 = Math.ceil(Math.random() * 6);
+		console.log(rnd2);
+		var b = (rnd2 - 1)*64;
+		dice2.style.backgroundPosition = ('-'+b+'px -64px') ;
+		var dice3 = document.getElementById('dice3');
+		var rnd3 = Math.ceil(Math.random() * 6);
+		console.log(rnd3);
+		var c = (rnd3 - 1)*64;
+		dice3.style.backgroundPosition = ('-'+c+'px -256px') ;
+		var dice4 = document.getElementById('dice4');
+		var rnd4 = Math.ceil(Math.random() * 6);
+		console.log(rnd4);
+		var d = (rnd4 - 1)*64;
+		dice4.style.backgroundPosition = ('-'+d+'px -320px') ;
+		var res1 = rnd1 + rnd2
+		document.getElementById('total1').innerHTML = res1;
+		var res2 = rnd3 + rnd4
+		document.getElementById('total2').innerHTML = res2;
+
+		if(res1 > res2){
+			document.getElementById('result1').innerHTML = "WIN!";
+			document.getElementById('result2').innerHTML = "LOSE!";
+		} else if (res2 > res1){
+			document.getElementById('result2').innerHTML = "WIN!";
+			document.getElementById('result1').innerHTML = "LOSE!";
+		} else {
+			document.getElementById('result2').innerHTML = "DRAW!";
+			document.getElementById('result1').innerHTML = "DRAW!";
+		}
+
+
+
+		var tableData1 = document.createElement('td');
+
+		tableData1.innerHTML = res1;
+		total1 = total1 + res1;
+
+		tableRow1.appendChild(tableData1)
+
+		var tableData2 = document.createElement('td');
+
+		tableData2.innerHTML = res2;
+		total2 = total2 + res2;
+
+		tableRow2.appendChild(tableData2);
+
+
+		if(count > 4) {
+			var tableDataTotal1 = document.createElement('td');
+
+			tableDataTotal1.innerHTML = total1;
+			tableRow1.appendChild(tableDataTotal1);
+
+			var tableDataTotal2 = document.createElement('td');
+
+			tableDataTotal2.innerHTML = total2;
+			tableRow2.appendChild(tableDataTotal2)
+		}
+	}
+
+	function roll5times() {
+		var rolltimes = function(){
+			roll(count++);
+		}
+
+		var id = setInterval(function(){
+		rolltimes();
+	    if(count > 4){　
+		clearInterval(id);　//idをclearIntervalで指定している
+		}}, 1000);
+	}
+	
+	function reset() {
+
+	}
+
+
+</script>
+
+</body>
+</html>
